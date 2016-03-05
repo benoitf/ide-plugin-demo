@@ -16,7 +16,7 @@
     <parent>
         <artifactId>che-parent</artifactId>
         <groupId>org.eclipse.che</groupId>
-        <version>4.0.0-RC10</version>
+        <version>4.0.0-RC11</version>
     </parent>
     <artifactId>che-examples-action</artifactId>
     <packaging>jar</packaging>
