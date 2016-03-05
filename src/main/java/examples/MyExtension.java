@@ -19,6 +19,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 import static org.eclipse.che.ide.api.action.IdeActions.GROUP_MAIN_MENU;
+import static org.eclipse.che.ide.api.action.IdeActions.GROUP_MAIN_TOOLBAR;
 
 @Singleton
 @Extension(title = "My Extension", version = "1.0.0")
@@ -34,6 +35,16 @@ public class MyExtension {
         actionManager.registerAction("MyMenuID", myMenu);
         actionManager.registerAction("MyActionID", action);
         myMenu.add(action);
+
+
+        // toolbar
+        DefaultActionGroup toolbarMenu = (DefaultActionGroup) actionManager.getAction(GROUP_MAIN_TOOLBAR);
+        DefaultActionGroup toolbarGroup = new DefaultActionGroup("LeftToolbar", true, actionManager);
+
+        actionManager.registerAction("MyMenuID", myMenu);
+        actionManager.registerAction("MyActionID", action);
+        toolbarGroup.add(action);
+        toolbarMenu.add(toolbarGroup);
 
     }
 }
