@@ -17,4 +17,17 @@ public interface MyResources extends ClientBundle {
 
     @Source("examples/MyExtension.svg")
     SVGResource MyProjectTypeIcon();
+
+    @Source("examples/jetty-logo.svg")
+    SVGResource jettyIcon();
+
+    @Source("examples/start.svg")
+    SVGResource startIcon();
+
+    @Source("examples/stop.svg")
+    SVGResource stopIcon();
+
+    @Source("examples/crane-with-build.svg")
+    SVGResource buildIcon();
+
 }

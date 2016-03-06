@@ -20,6 +20,7 @@
     </parent>
     <groupId>org.eclipse.che.eclipsecon.demo</groupId>
     <artifactId>che-examples-action</artifactId>
+    <version>4.0.0-RC11</version>
     <packaging>jar</packaging>
     <name>Che :: Examples :: Action</name>
     <dependencies>
@@ -29,7 +30,15 @@
         </dependency>
         <dependency>
             <groupId>org.eclipse.che.core</groupId>
+            <artifactId>che-core-commons-gwt</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.che.core</groupId>
             <artifactId>che-core-ide-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.che.plugin</groupId>
+            <artifactId>che-plugin-machine-ext-client</artifactId>
         </dependency>
         <dependency>
             <groupId>org.vectomatic</groupId>

@@ -12,22 +12,22 @@ package examples;
 
 import org.eclipse.che.ide.api.action.Action;
 import org.eclipse.che.ide.api.action.ActionEvent;
-
-import com.google.inject.Inject;
 import org.eclipse.che.ide.api.notification.NotificationManager;
+
+import javax.inject.Inject;
 
 public class MyAction extends Action {
 
-private NotificationManager notificationManager;
+    private NotificationManager notificationManager;
 
     @Inject
     public MyAction(MyResources resources, NotificationManager notificationManager) {
-        super("My Action", "My Action Description", null, resources.MyProjectTypeIcon());
+        super("My notification", "My Notification Description", null, resources.MyProjectTypeIcon());
         this.notificationManager = notificationManager;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-            notificationManager.notify("It's My action !");
+        notificationManager.notify("It's a notification for eclipsecon !");
     }
 }

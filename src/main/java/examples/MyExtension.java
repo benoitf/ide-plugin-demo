@@ -4,19 +4,19 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * <p>
  * Contributors:
- *   Codenvy, S.A. - initial API and implementation
+ * Codenvy, S.A. - initial API and implementation
  *******************************************************************************/
 package examples;
+
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 import org.eclipse.che.ide.api.action.ActionManager;
 import org.eclipse.che.ide.api.action.DefaultActionGroup;
 import org.eclipse.che.ide.api.constraints.Constraints;
 import org.eclipse.che.ide.api.extension.Extension;
-
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
 
 import static org.eclipse.che.ide.api.action.IdeActions.GROUP_MAIN_MENU;
 import static org.eclipse.che.ide.api.action.IdeActions.GROUP_MAIN_TOOLBAR;
@@ -25,25 +25,49 @@ import static org.eclipse.che.ide.api.action.IdeActions.GROUP_MAIN_TOOLBAR;
 @Extension(title = "My Extension", version = "1.0.0")
 public class MyExtension {
 
-    @Inject
-    public MyExtension(MyResources resources, ActionManager actionManager, MyAction action) {
 
-        DefaultActionGroup mainMenu = (DefaultActionGroup) actionManager.getAction(GROUP_MAIN_MENU);
-        DefaultActionGroup myMenu = new DefaultActionGroup("My Menu", true, actionManager);
+    @Inject
+    public MyExtension(MyResources resources, ActionManager actionManager, MyAction action, StartJettyAction startJettyAction,
+                       StopJettyAction stopJettyAction, BuildAndStartAction buildAndStartAction) {
+
+        // register action
+        actionManager.registerAction("MyActionID", action);
+
+
+        // get main menu
+        DefaultActionGroup mainMenu = (DefaultActionGroup)actionManager.getAction(GROUP_MAIN_MENU);
+
+        // create dedicated menu entry
+        DefaultActionGroup myMenu = new DefaultActionGroup("Jetty", true, actionManager);
+
+        // add the jetty menu at the end
         mainMenu.add(myMenu, Constraints.LAST);
 
+        // register menu
         actionManager.registerAction("MyMenuID", myMenu);
-        actionManager.registerAction("MyActionID", action);
+
+        // add action in our menu
         myMenu.add(action);
+        myMenu.addSeparator();
+        myMenu.add(startJettyAction);
+        myMenu.add(stopJettyAction);
+        myMenu.add(buildAndStartAction);
 
 
-        // toolbar
-        DefaultActionGroup toolbarMenu = (DefaultActionGroup) actionManager.getAction(GROUP_MAIN_TOOLBAR);
-        DefaultActionGroup toolbarGroup = new DefaultActionGroup("LeftToolbar", true, actionManager);
+        // get main toolbar
+        DefaultActionGroup toolbarMenu = (DefaultActionGroup)actionManager.getAction(GROUP_MAIN_TOOLBAR);
 
-        actionManager.registerAction("MyMenuID", myMenu);
-        actionManager.registerAction("MyActionID", action);
+        // create a new toolbar group
+        DefaultActionGroup toolbarGroup = new DefaultActionGroup("Jetty", true, actionManager);
+        toolbarGroup.getTemplatePresentation().setDescription("Jetty...");
+        toolbarGroup.getTemplatePresentation().setSVGResource(resources.jettyIcon());
+
+        // add action
         toolbarGroup.add(action);
+        toolbarGroup.addSeparator();
+        toolbarGroup.add(startJettyAction);
+        toolbarGroup.add(stopJettyAction);
+        toolbarGroup.add(buildAndStartAction);
         toolbarMenu.add(toolbarGroup);
 
     }
