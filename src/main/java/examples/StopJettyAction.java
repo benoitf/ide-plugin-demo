@@ -34,7 +34,7 @@ public class StopJettyAction extends Action {
     }
 
     public void actionPerformed(ActionEvent event) {
-        String name = "jetty:stop";
+        String name = "jetty-project: stop";
         CommandConfiguration command = this.selectCommandAction.getCommandByName(name);
         if(command != null) {
             this.commandManager.execute(command);

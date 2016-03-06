@@ -34,7 +34,7 @@ public class BuildAndStartAction extends Action {
     }
 
     public void actionPerformed(ActionEvent event) {
-        String name = "jetty:buildAndDeploy";
+        String name = "jetty-project: buildAndDeploy";
         CommandConfiguration command = this.selectCommandAction.getCommandByName(name);
         if(command != null) {
             this.commandManager.execute(command);

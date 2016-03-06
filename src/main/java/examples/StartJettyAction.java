@@ -34,7 +34,7 @@ public class StartJettyAction extends Action {
     }
 
     public void actionPerformed(ActionEvent event) {
-        String name = "jetty:start";
+        String name = "jetty-project: start";
         CommandConfiguration command = this.selectCommandAction.getCommandByName(name);
         if(command != null) {
             this.commandManager.execute(command);
