@@ -18,7 +18,7 @@
         <groupId>org.eclipse.che</groupId>
         <version>4.0.0-RC11</version>
     </parent>
-    <groupId>org.eclipse.che.eclipsecon.demo</groupId>
+    <groupId>org.eclipse.che.jug.demo</groupId>
     <artifactId>che-examples-action</artifactId>
     <version>4.0.0-RC11</version>
     <packaging>jar</packaging>
