@@ -14,7 +14,7 @@ import com.google.inject.Inject;
 
 import org.eclipse.che.ide.api.action.Action;
 import org.eclipse.che.ide.api.action.ActionEvent;
-import org.eclipse.che.ide.extension.machine.client.actions.SelectCommandComboBoxReady;
+import org.eclipse.che.ide.extension.machine.client.actions.SelectCommandComboBox;
 import org.eclipse.che.ide.extension.machine.client.command.CommandConfiguration;
 import org.eclipse.che.ide.extension.machine.client.command.CommandManager;
 import org.eclipse.che.ide.util.loging.Log;
@@ -23,11 +23,11 @@ import org.eclipse.che.ide.util.loging.Log;
  * @author Florent Benoit
  */
 public class StopJettyAction extends Action {
-    private final SelectCommandComboBoxReady  selectCommandAction;
+    private final SelectCommandComboBox  selectCommandAction;
     private final CommandManager              commandManager;
 
     @Inject
-    public StopJettyAction(SelectCommandComboBoxReady selectCommandAction, CommandManager commandManager, MyResources resources) {
+    public StopJettyAction(SelectCommandComboBox selectCommandAction, CommandManager commandManager, MyResources resources) {
         super("Stop Jetty", "Stop the jetty appserver", null, resources.stopIcon());
         this.selectCommandAction = selectCommandAction;
         this.commandManager = commandManager;

@@ -14,7 +14,7 @@ import com.google.inject.Inject;
 
 import org.eclipse.che.ide.api.action.Action;
 import org.eclipse.che.ide.api.action.ActionEvent;
-import org.eclipse.che.ide.extension.machine.client.actions.SelectCommandComboBoxReady;
+import org.eclipse.che.ide.extension.machine.client.actions.SelectCommandComboBox;
 import org.eclipse.che.ide.extension.machine.client.command.CommandConfiguration;
 import org.eclipse.che.ide.extension.machine.client.command.CommandManager;
 import org.eclipse.che.ide.util.loging.Log;
@@ -23,11 +23,11 @@ import org.eclipse.che.ide.util.loging.Log;
  * @author Florent Benoit
  */
 public class StartJettyAction extends Action {
-    private final SelectCommandComboBoxReady  selectCommandAction;
-    private final CommandManager              commandManager;
+    private final SelectCommandComboBox selectCommandAction;
+    private final CommandManager        commandManager;
 
     @Inject
-    public StartJettyAction(SelectCommandComboBoxReady selectCommandAction, CommandManager commandManager, MyResources resources) {
+    public StartJettyAction(SelectCommandComboBox selectCommandAction, CommandManager commandManager, MyResources resources) {
         super("Start Jetty", "Start the jetty appserver", null, resources.startIcon());
         this.selectCommandAction = selectCommandAction;
         this.commandManager = commandManager;

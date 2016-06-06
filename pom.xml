@@ -16,11 +16,11 @@
     <parent>
         <artifactId>che-parent</artifactId>
         <groupId>org.eclipse.che</groupId>
-        <version>4.0.0-RC11</version>
+        <version>4.3.0-RC2-SNAPSHOT</version>
     </parent>
-    <groupId>org.eclipse.che.jug.demo</groupId>
+    <groupId>org.eclipse.che.eclipsecon.demo</groupId>
     <artifactId>che-examples-action</artifactId>
-    <version>4.0.0-RC11</version>
+    <version>4.3.0-RC2-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>Che :: Examples :: Action</name>
     <dependencies>

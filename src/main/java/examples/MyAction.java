@@ -28,6 +28,6 @@ public class MyAction extends Action {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        notificationManager.notify("It's a notification for JUG !");
+        notificationManager.notify("It's a notification for example !");
     }
 }

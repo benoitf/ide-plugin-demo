@@ -12,7 +12,7 @@ package examples;
 
 import org.eclipse.che.ide.api.action.Action;
 import org.eclipse.che.ide.api.action.ActionEvent;
-import org.eclipse.che.ide.extension.machine.client.actions.SelectCommandComboBoxReady;
+import org.eclipse.che.ide.extension.machine.client.actions.SelectCommandComboBox;
 import org.eclipse.che.ide.extension.machine.client.command.CommandConfiguration;
 import org.eclipse.che.ide.extension.machine.client.command.CommandManager;
 import org.eclipse.che.ide.util.loging.Log;
@@ -23,11 +23,11 @@ import javax.inject.Inject;
  * @author Florent Benoit
  */
 public class BuildAndStartAction extends Action {
-    private final SelectCommandComboBoxReady  selectCommandAction;
-    private final CommandManager              commandManager;
+    private final SelectCommandComboBox selectCommandAction;
+    private final CommandManager        commandManager;
 
     @Inject
-    public BuildAndStartAction(SelectCommandComboBoxReady selectCommandAction, CommandManager commandManager, MyResources resources) {
+    public BuildAndStartAction(SelectCommandComboBox selectCommandAction, CommandManager commandManager, MyResources resources) {
         super("Build and run", "Build the application and deploy it on the jetty appserver", null, resources.buildIcon());
         this.selectCommandAction = selectCommandAction;
         this.commandManager = commandManager;
