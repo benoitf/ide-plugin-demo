@@ -14,33 +14,31 @@ import com.google.inject.Inject;
 
 import org.eclipse.che.ide.api.action.Action;
 import org.eclipse.che.ide.api.action.ActionEvent;
-import org.eclipse.che.ide.extension.machine.client.actions.SelectCommandComboBox;
-import org.eclipse.che.ide.extension.machine.client.command.CommandConfiguration;
-import org.eclipse.che.ide.extension.machine.client.command.CommandManager;
-import org.eclipse.che.ide.util.loging.Log;
+import org.eclipse.che.ide.api.app.AppContext;
+import org.eclipse.che.ide.api.command.CommandImpl;
+import org.eclipse.che.ide.api.command.CommandManager;
+
+import java.util.Collections;
+import java.util.Map;
 
 /**
  * @author Florent Benoit
  */
 public class StartJettyAction extends Action {
-    private final SelectCommandComboBox selectCommandAction;
     private final CommandManager        commandManager;
+    private final AppContext            appContext;
 
     @Inject
-    public StartJettyAction(SelectCommandComboBox selectCommandAction, CommandManager commandManager, MyResources resources) {
+    public StartJettyAction(CommandManager commandManager, MyResources resources, AppContext appContext) {
         super("Start Jetty", "Start the jetty appserver", null, resources.startIcon());
-        this.selectCommandAction = selectCommandAction;
         this.commandManager = commandManager;
+        this.appContext = appContext;
     }
 
+    @Override
     public void actionPerformed(ActionEvent event) {
-        String name = "jetty-project: start";
-        CommandConfiguration command = this.selectCommandAction.getCommandByName(name);
-        if(command != null) {
-            this.commandManager.execute(command);
-        } else {
-           Log.error(getClass(), "unable to start jetty as command jetty:start is not there");
-        }
-
+        Map<String, String> attributes = Collections.singletonMap("previewUrl", "http://localhost:8080");
+        CommandImpl command = new CommandImpl("start-jetty", "/home/user/jetty9/bin/jetty.sh start", "custom", attributes);
+        this.commandManager.executeCommand(command,  appContext.getDevMachine().getDescriptor());
     }
 }

@@ -12,35 +12,33 @@ package examples;
 
 import org.eclipse.che.ide.api.action.Action;
 import org.eclipse.che.ide.api.action.ActionEvent;
-import org.eclipse.che.ide.extension.machine.client.actions.SelectCommandComboBox;
-import org.eclipse.che.ide.extension.machine.client.command.CommandConfiguration;
-import org.eclipse.che.ide.extension.machine.client.command.CommandManager;
-import org.eclipse.che.ide.util.loging.Log;
+import org.eclipse.che.ide.api.app.AppContext;
+import org.eclipse.che.ide.api.command.CommandImpl;
+import org.eclipse.che.ide.api.command.CommandManager;
 
 import javax.inject.Inject;
+import java.util.Collections;
+import java.util.Map;
 
 /**
  * @author Florent Benoit
  */
 public class BuildAndStartAction extends Action {
-    private final SelectCommandComboBox selectCommandAction;
-    private final CommandManager        commandManager;
+    private final CommandManager commandManager;
+    private final AppContext     appContext;
 
     @Inject
-    public BuildAndStartAction(SelectCommandComboBox selectCommandAction, CommandManager commandManager, MyResources resources) {
+    public BuildAndStartAction(CommandManager commandManager, MyResources resources, AppContext appContext) {
         super("Build and run", "Build the application and deploy it on the jetty appserver", null, resources.buildIcon());
-        this.selectCommandAction = selectCommandAction;
         this.commandManager = commandManager;
+        this.appContext = appContext;
     }
 
+    @Override
     public void actionPerformed(ActionEvent event) {
-        String name = "jetty-project: buildAndDeploy";
-        CommandConfiguration command = this.selectCommandAction.getCommandByName(name);
-        if(command != null) {
-            this.commandManager.execute(command);
-        } else {
-           Log.error(getClass(), "unable to stop jetty as command jetty:buildAndDeploy is not there");
-        }
-
+        Map<String, String> attributes = Collections.emptyMap();
+        CommandImpl command = new CommandImpl("buildAndDeploy", "mvn -f ${current.project.path} clean install && cp ${current.project.path}/target/*.war /home/user/jetty9/webapps/ROOT.war && /home/user/jetty9/bin/jetty.sh  run", "mvn", attributes);
+        this.commandManager.executeCommand(command,  appContext.getDevMachine().getDescriptor());
     }
+
 }
