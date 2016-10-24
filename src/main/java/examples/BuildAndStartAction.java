@@ -36,8 +36,8 @@ public class BuildAndStartAction extends Action {
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        Map<String, String> attributes = Collections.emptyMap();
-        CommandImpl command = new CommandImpl("buildAndDeploy", "mvn -f ${current.project.path} clean install && cp ${current.project.path}/target/*.war /home/user/jetty9/webapps/ROOT.war && /home/user/jetty9/bin/jetty.sh  run", "mvn", attributes);
+        Map<String, String> attributes = Collections.singletonMap("previewUrl", "http://${server.port.8080}/spring/hello");
+        CommandImpl command = new CommandImpl("buildAndDeploy", "mvn -f /projects/jetty-project clean install && cp /projects/jetty-project/target/*.war /home/user/jetty9/webapps/ROOT.war && /home/user/jetty9/bin/jetty.sh  run", "mvn", attributes);
         this.commandManager.executeCommand(command,  appContext.getDevMachine().getDescriptor());
     }
 
